@@ -4,6 +4,8 @@ import { grpcClientOptions } from "@shared/options/s3.option";
 import { Module } from "@nestjs/common";
 import { ClientsModule, Transport } from "@nestjs/microservices";
 
+import { PrismaModule } from "src/common/modules";
+
 import { ProductController } from "./product.controller";
 import { ProductService } from "./product.service";
 
@@ -16,6 +18,7 @@ import { ProductService } from "./product.service";
         options: grpcClientOptions.options,
       },
     ]),
+    PrismaModule,
   ],
   controllers: [ProductController],
   providers: [ProductService],
