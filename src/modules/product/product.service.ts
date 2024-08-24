@@ -13,7 +13,7 @@ import { PrismaService } from "src/common/modules/prisma/prisma.service";
 export class ProductService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async createProduct(request: CreateProduct) {
+  async createProduct(request: CreateProduct, imagePath: string) {
     return this.prismaService.product.create({
       data: {
         title: request.title,
@@ -22,6 +22,7 @@ export class ProductService {
             uid: request.companyId,
           },
         },
+        imagePath,
       },
     });
   }
@@ -40,6 +41,11 @@ export class ProductService {
       });
     }
 
-    return res;
+    return {
+      uid: res.uid,
+      title: res.title,
+      companyId: res.companyId,
+      imageUrl: res.imagePath,
+    };
   }
 }
