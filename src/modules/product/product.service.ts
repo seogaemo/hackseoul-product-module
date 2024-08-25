@@ -17,11 +17,7 @@ export class ProductService {
     return this.prismaService.product.create({
       data: {
         title: request.title,
-        company: {
-          connect: {
-            uid: request.companyId,
-          },
-        },
+        companyId: request.companyId,
         imagePath,
       },
     });
